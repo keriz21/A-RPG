@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://wqjrxo6hfgfp"]
+[gd_scene load_steps=11 format=3 uid="uid://wqjrxo6hfgfp"]
 
 [ext_resource type="Script" path="res://Scene/player.gd" id="1_vmjru"]
 [ext_resource type="Texture2D" uid="uid://bp621l8lfy5aq" path="res://Resources/Actor/Characters/GreenNinja/SpriteSheet.png" id="1_w3j6c"]
@@ -102,12 +102,15 @@ _data = {
 "walkUp": SubResource("Animation_yu8ud")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkj4a"]
+size = Vector2(14, 14)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_vmjru")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
@@ -124,3 +127,11 @@ vframes = 7
 libraries = {
 "": SubResource("AnimationLibrary_jn5vo")
 }
+
+[node name="hurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_qkj4a")
+
+[connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
