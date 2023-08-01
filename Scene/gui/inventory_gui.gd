@@ -19,6 +19,6 @@ func close():
 	closed.emit()
 	
 func _ready():
-	for i in range(15):
+	for i in range(20):
 		var slot = slots.instantiate()
 		grid.add_child(slot)
